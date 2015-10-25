@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Project Shakespear - case study</title>
+
+		<meta name="description" content="How we built an enterprise media publishing platform on Drupal 8.">
+		<meta name="author" content="Janez Urevc (Examiner.com)">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+
+				<section id="title">
+					<h3>How we built an enterprise media publishing platform on Drupal 8</h3>
+          <p>
+            <small>Brought to you by examiner.com.</small>
+          </p>
+					<!--<p>
+						<small><a href="http://author.me">John Doe</a> / <a href="http://twitter.com/handle">@handle</a></small>
+					</p>-->
+				</section>
+
+        <!-- Change this section for each presenter that uses this slide deck.
+        <section id="author">
+          <h1>About author</h1>
+        </section>
+        -->
+
+        <section id="examiner">
+
+          <section id="examiner-about" data-background="img/examiner.png">
+            <aside data-markdown class="notes">
+              - one of the first D7 websites
+              - high traffic
+                  - 50M page views/month
+                  - 10k active examiners
+                  - 3k new nodes daily
+                  - 3.3M terms
+                  - 14M nodes
+              - content production model
+                  - generally no internal content creators
+                  - freelance writers
+                  - stats
+            </aside>
+          </section>
+
+          <section id="examiner-aeg" data-background="img/aeg.png">
+            <aside data-markdown class="notes">
+              - "bought" by AEG
+              - merged with AXS (part of AEG)
+              - AEG - Staples center, DrupalCon LA, anyone?
+            </aside>
+          </section>
+
+          <section id="exainer-axs" data-background="img/axs.png">
+            <aside data-markdown class="notes">
+              - merger
+              - axs.com uses our content to drive ticket sales
+              - examiner becomes publishing platform delivering content to many destinations
+              - not designed to do that
+            </aside>
+          </section>
+
+          <section id="examiner-speed-first">
+            <h2>Delivering content to users is our main priority.</h2>
+            <aside data-markdown class="notes">
+              - our main priority is delivering content
+              - we did invest significant amount of energy into content creation part
+              - but! there are limitations
+              - suddenly we need to send content around
+              - ... and provide nice creation experice
+              - ... and send content to another site
+              - ... and another
+              - ... and another
+            </aside>
+          </section>
+
+          <section id="examiner-deliver-content">
+            <h2>Content for AXS!!</h2>
+          </section>
+
+          <section id="examiner-creation-experience">
+            <h2>Creation experience for all!!!</h2>
+          </section>
+
+          <section id="examiner-fast-delivery">
+            <h2>Blazing fast content delivery!</h2>
+          </section>
+
+          <section id="examiner-content-rowdy">
+            <img src="img/rowdy.png" />
+            <h2>Oh! And content for Rowdy!</h2>
+          </section>
+
+          <section id="examiner-success-baby">
+            <img src="img/success-baby.jpg" />
+          </section>
+
+          <section id="examiner-content-for-more-1">
+            <h2>... and for another site!</h2>
+          </section>
+
+          <section id="examiner-content-for-more-2">
+            <h2>... and for another site.</h2>
+          </section>
+
+          <section id="examiner-content-for-more-3">
+            <h2>... and for another site ...</h2>
+          </section>
+
+          <section id="examiner-hit-the-wall">
+            <img src="img/hit-the-wall.gif" />
+          </section>
+
+        </section>
+
+        <section id="shakespear">
+
+          <section id="shakespear-is-born" data-background="img/shakespear.png">
+            <aside data-markdown class="notes">
+              - Project Shakespear is born
+            </aside>
+          </section>
+
+          <section data-markdown data-separator-notes="^Note:" id="shakespear-requirements">
+            <script type="text/template">
+              ## Requirements
+
+              - Handle creation for many different destinations, <!-- .element: class="fragment" data-fragment-index="1" -->
+              - support varying delivery methods, <!-- .element: class="fragment" data-fragment-index="2" -->
+              - support assignment management, <!-- .element: class="fragment" data-fragment-index="3" -->
+                  - assignment creation, <!-- .element: class="fragment" data-fragment-index="4" -->
+                  - scheduling, <!-- .element: class="fragment" data-fragment-index="5" -->
+                  - progress tracking, <!-- .element: class="fragment" data-fragment-index="6" -->
+                  - review workflow, <!-- .element: class="fragment" data-fragment-index="7" -->
+                  - notifications and feedback. <!-- .element: class="fragment" data-fragment-index="8" -->
+
+              Note:
+              - content structure: fields, media, ...
+              - JSON, push/pull, media push, media pull
+            </script>
+          </section>
+
+          <section data-background="img/drupal8.png" id="shakespear-drupal-8">
+          </section>
+
+          <section id="shakespear-timeline">
+            <h2>Timeline</h2>
+            <h3 class="fragment">Planning: mid 2014</h3>
+            <h3 class="fragment">Decision for D8: late 2014</h3>
+            <h3 class="fragment">Development starts: early 2015</h3>
+          </section>
+
+          <section id="shakespear-why">
+            <h2>Why Drupal 8?</h2>
+            <h3 class="fragment">Because it is cool!</h3>
+            <aside data-markdown class="notes">
+              - Configuration management
+              - REST built-in
+              - Contemporary patterns
+              - Fun for technical team
+              - Longer lifespan
+              - We felt capable doing it
+              - Open timeframe
+            </aside>
+          </section>
+
+          <section id="shakespear-why-not">
+            <h2>Why Drupal 7?</h2>
+            <h3 class="fragment">No objective reasons really!</h3>
+            <aside data-markdown class="notes">
+              - OO :)
+              - Slower progress/development (contrib missing, chasing moving target)
+              - Need to learn Drupal again :)
+              - People are comfortable with D7
+              - A lot of unknowns
+              - Working with early releases
+            </aside>
+          </section>
+
+          <section id="shakespear-success-baby">
+            <img src="img/success-baby.jpg" />
+          </section>
+
+        </section>
+
+
+        <section id="how">
+
+          <section id="how-we-did-it">
+            <h2>How we did it?</h2>
+          </section>
+
+          <section id="how-requirements">
+            <h2>Requirements</h2>
+            <aside data-markdown class="notes">
+              - Business/product team provides
+              - feedback
+              - review
+              - Result: GDoc with all requirements in one place
+              - Each item represents an initial user story
+              - * which are split further as we feel to
+            </aside>
+          </section>
+
+          <section id="how-scrum">
+            <h2>Scrum</h2>
+            <aside data-markdown class="notes">
+              - part of our culture
+              - 2 week TBs
+              - initially "cowboy development" - developers decide what they work on
+              - list of requirements used as a guideline
+              - later, when things become "visible", more structured
+            </aside>
+          </section>
+
+          <section id="how-reviews">
+            <h2>Peer reviews</h2>
+            <aside data-markdown class="notes">
+              - github pull request
+              - feature branches
+              - peer-review
+              - release manager
+            </aside>
+          </section>
+
+          <section id="how-initial-development">
+            <h2>Initial backend development</h2>
+            <aside data-markdown class="notes">
+              - backend
+              - structure, basic entity types
+              - install profile
+              - project structure
+            </aside>
+          </section>
+
+          <section id="how-testing">
+            <h2>Testing (automated and manual)</h2>
+            <aside data-markdown class="notes">
+              - Automated - Behat
+              - each PR tested automatically
+              - github integration
+              - Manual QA - jenkins install script
+            </aside>
+          </section>
+
+          <section id="how-test-fail">
+            <img src="img/test-fail.png" />
+          </section>
+
+          <section id="how-test-pass">
+            <img src="img/test-pass.png" />
+          </section>
+
+          <section id="how-core-diff">
+            <img src="img/diff.png" class="stretch"/>
+            <aside data-markdown class="notes">
+              - what is this?
+              - actuall diff would be just a line (tried, believe me)
+              - commits in a week
+            </aside>
+          </section>
+
+          <section id="how-chasing-core">
+            <h2>Drupal 8 was a moving target!</h2>
+            <aside data-markdown class="notes">
+              - chasing core once a week
+              - review commit-per-commit
+              - peer-review
+              - behat
+              - sanity check
+              - things broke
+              - was not that bad
+              - sometimes it was :)
+              - we were able to re-install
+            </aside>
+          </section>
+
+          <section id="how-cdd">
+            <h2>Code driven development</h2>
+            <aside data-markdown class="notes">
+              - install profile
+              - modules
+              - config stored in this modules
+            </aside>
+          </section>
+
+          <section id="how-theme">
+            <h2>Themers kick in</h2>
+            <aside data-markdown class="notes">
+              - part of culture
+              - EX backend, themeing in one TB
+              - here we had more work
+              - basic structure in place
+              - Custom theme based on bootstrap
+              - more structured scrum
+              - backend provides support
+            </aside>
+          </section>
+
+          <section id="how-user-testing">
+            <h2>User testing</h2>
+            <aside data-markdown class="notes">
+              - in that phase ATM
+              - content team
+              - writers not yet
+            </aside>
+          </section>
+
+          <section id="how-next-steps">
+            <h2>Next steps?</h2>
+            <aside data-markdown class="notes">
+              - contributors get to use it
+              - Rowdy first
+              - Then AXS
+              - Then other "clients"
+            </aside>
+          </section>
+
+        </section>
+
+        <section id="contrib">
+          <section id="contrib-media-entity">
+            <h2>Media entity (and friends*)</h2>
+            <a href="http://drupal.org/project/media_entity">http://drupal.org/project/media_entity</a>
+            <p>Twitter, Instagram, slideshow, ...</p>
+          </section>
+          <section id="contrib-ief">
+            <h2>Inline entity form</h2>
+            <a href="http://drupal.org/project/inline_entity_form">http://drupal.org/project/inline_entity_form</a>
+          </section>
+          <section id="contrib-eb">
+            <h2>Entity browser</h2>
+            <a href="http://drupal.org/project/entity_browser">http://drupal.org/project/entity_browser</a>
+          </section>
+          <section id="contrib-relation">
+            <h2>Relation</h2>
+            <a href="http://drupal.org/project/relation">http://drupal.org/project/relation</a>
+          </section>
+          <section id="contrib-bootstrap">
+            <h2>Bootstrap</h2>
+            <a href="http://drupal.org/project/bootstrap">http://drupal.org/project/bootstrap</a>
+          </section>
+          <section data-markdown id="contrib-others">
+            <script type="text/template">
+              ## And others:
+
+              - Scheduler, <!-- .element: class="fragment" data-fragment-index="1" -->
+              - Terms of service, <!-- .element: class="fragment" data-fragment-index="2" -->
+              - DropzoneJS, <!-- .element: class="fragment" data-fragment-index="3" -->
+              - Hash wrapper, <!-- .element: class="fragment" data-fragment-index="4" -->
+              - Devel, <!-- .element: class="fragment" data-fragment-index="5" -->
+              - Composer manager, <!-- .element: class="fragment" data-fragment-index="6" -->
+
+            </script>
+          </section>
+        </section>
+
+        <section id="demo">
+
+          <section id="demo-first">
+            <h1>Demo time!</h1>
+            <small>*almost</small>
+          </section>
+
+          <section id="demo-assignment-crud">
+            <video controls width="75%">
+              <source src="video/assignment-create.webm" type="video/webm">
+              Your web browser doesn't support playing this WebM screencast.
+            </video>
+          </section>
+
+          <section id="demo-assignment-claim">
+            <video controls width="75%">
+              <source src="video/assignment-claim.webm" type="video/webm">
+              Your web browser doesn't support playing this WebM screencast.
+            </video>
+          </section>
+
+          <section id="demo-assignment-content">
+            <video controls width="75%">
+              <source src="video/article.webm" type="video/webm">
+              Your web browser doesn't support playing this WebM screencast.
+            </video>
+          </section>
+
+        </section>
+
+        <section id="lessons">
+          <h2>What we learned?</h2>
+          <aside class="notes" data-markdown>
+            - Once you go D8 you never go back.
+            - Devs are excited.
+            - No base theme.
+            - Tests are cool! And help you a lot.
+            - Not really new for us
+                - Reviews are cool.
+                - Feature branches are cool.
+                - Scrum/agile is cool.
+                - Code-driven development is cool.
+          </aside>
+        </section>
+
+        <section id="questions">
+          <h2>Questions?</h2>
+          <p>
+            <small>Brought to you by examiner.com.</small>
+          </p>
+          <!--<p>
+            <small><a href="http://author.me">John Doe</a> / <a href="http://twitter.com/handle">@handle</a></small>
+          </p>-->
+        </section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
